@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>ETF 市场阶段雷达</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">MULTI-CYCLE ETF RADAR</p>
+      <h1>ETF 市场阶段雷达</h1>
+    </div>
+    <div class="freshness"><span class="pulse"></span><span id="dataDate">载入中</span><small>日线数据</small></div>
+  </header>
+
+  <main>
+    <section class="summary" id="summary"></section>
+    <nav class="category-tabs" id="categoryTabs" aria-label="ETF资产类别"></nav>
+    <section class="method-note">
+      <strong>阅读原则</strong>
+      <span>阶段是规则化判断，不是预测。胜率与历史赔率来自同一 ETF 的过往相似突破事件；样本不足时不应据此决策。</span>
+      <button id="methodButton">查看统计口径</button>
+    </section>
+
+    <section class="workspace">
+      <aside class="filters">
+        <label>搜索 ETF<input id="search" type="search" placeholder="代码、名称或跟踪指数"></label>
+        <label>阶段<select id="stageFilter"><option value="all">全部阶段</option><option value="1">1 · 蓄势</option><option value="2">2 · 抬升</option><option value="3">3 · 派发</option><option value="4">4 · 下跌</option><option value="0">数据不足</option></select></label>
+        <label>行动状态<select id="actionFilter"><option value="all">全部状态</option><option>多头候选</option><option>赔率临界</option><option>趋势持有/等待突破</option><option>观察蓄势突破</option><option>回避新多/保护利润</option><option>回避做多</option><option>数据不足</option></select></label>
+        <label>基金类型<select id="typeFilter"><option value="all">全部类型</option></select></label>
+        <label>最低历史样本<input id="sampleFilter" type="range" min="0" max="50" value="10"><span id="sampleValue">10</span><small class="field-help">过滤历史入场事件数量；调到0可查看样本不足的ETF。</small></label>
+        <div class="legend">
+          <h3>四阶段</h3>
+          <p><i class="s1"></i><b>蓄势</b> 下跌后趋稳，等待阻力突破</p>
+          <p><i class="s2"></i><b>抬升</b> 高低点抬高，均线向上</p>
+          <p><i class="s3"></i><b>派发</b> 上升动能衰退，保护利润</p>
+          <p><i class="s4"></i><b>下跌</b> 高低点降低，回避做多</p>
+          <p><i class="s0"></i><b>数据不足</b> 少于50个有效交易日</p>
+        </div>
+      </aside>
+
+      <div class="results">
+        <div class="results-head"><p id="resultCount"></p><select id="sort"><option value="candidate">候选优先</option><option value="win">胜率从高到低</option><option value="odds">历史赔率从高到低</option><option value="rr">当前风险收益从高到低</option><option value="amount">成交额从高到低</option></select></div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>ETF</th><th>阶段</th><th>当前判断</th><th>胜率 / 样本</th><th>历史赔率</th><th>当前风险收益</th><th>日涨跌</th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <div class="pagination"><button id="prev">上一页</button><span id="pageInfo"></span><button id="next">下一页</button></div>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="detail"><button class="close" aria-label="关闭">×</button><div id="detailBody"></div></dialog>
+  <dialog id="method"><button class="close" aria-label="关闭">×</button><div class="method-content"><p class="eyebrow">METHODOLOGY</p><h2>计算口径</h2><div id="methodBody"></div></div></dialog>
+  <footer>仅供研究与主动投资参考，不构成收益承诺或投资建议。数据与模型判断可能存在延迟或误差。</footer>
+  <script src="app.js"></script>
+</body>
+</html>

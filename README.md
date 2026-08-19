@@ -1,13 +1,5 @@
-# ETF 市场阶段雷达
+# ETF Stage Radar
 
-## 使用
+沪深场内 ETF 阶段雷达，展示阶段判断、历史样本胜率/赔率、K 线以及 MA5、MA20、MA50。
 
-1. 运行 `build_signals.py`，从工作区的 `ifind_etf_daily.csv` 和 `ifind_etf_universe.csv` 生成最新信号。
-2. 运行 `start_site.ps1`。
-3. 浏览器访问 `http://127.0.0.1:8765/`。
-
-网站展示所有具有至少 50 个有效交易日的 ETF。阶段识别、胜率、赔率和风险收益口径均可在页面的“查看统计口径”中查看。
-
-每日 18:00 的 Codex 自动化负责调用 iFinD 获取最新日行情、校验并增量合并数据，然后重新运行信号生成程序。网站服务读取更新后的 JSON，不需要修改网页代码。
-
-若 iFinD 返回全量日行情 CSV，可先运行 `merge_ifind_daily.py <原始CSV路径>`。程序会检查证券覆盖率和 OHLC 合法性，采用临时文件安全替换，并分别维护完整数据集与严格有效数据集。
+公开网站：https://zoe12333.github.io/etf-stage-radar/
